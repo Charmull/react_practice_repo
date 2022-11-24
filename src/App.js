@@ -6,6 +6,7 @@ import * as StompJS from "@stomp/stompjs";
 import uuid from "react-uuid";
 
 const localId = uuid();
+const roomId = uuid();
 
 function App() {
   let socket;
@@ -80,15 +81,15 @@ function App() {
         () => {
           console.log("connect!");
           stomp.subscribe("/sub/video/joined-room-info", (data) => {
+            console.log(data);
             console.log(JSON.parse(data.body));
           });
 
           stomp.send(
             "/pub/video/joined-room-info",
             JSON.stringify({
-              id: localId,
-              name: localId,
-              sessionId: localId,
+              roomId: "2f642e2a-1a80-4955-89f0-a3cd63d7ff64",
+              userId: "a54b53d9-7726-4db6-83de-9fc4cc317d2b",
             })
           );
         },
